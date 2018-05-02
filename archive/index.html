@@ -1,0 +1,116 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<title>WTF IS MY RIDICULOUS DND MAGICAL ITEM</title>
+	<style type="text/css">
+		#content {
+			text-align:center;
+			width:100%;
+			display:block;
+			
+		}
+		#content div {
+			width:60%;
+			margin:auto;
+		}
+		#opening {
+			font-style:italic;
+		}
+		
+		#item {
+			font-weight:bold;
+		}
+		#credits {
+			text-align:right;
+			position:absolute;
+			bottom:0;
+			right:0;
+			margin: 12px 24px;
+		}
+		ul {
+			list-style-type: none;
+		}
+	</style>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script>
+		$( document ).ready(function() {
+		    generateItem();
+		});
+	
+		function generateItem() {
+			var condition = new Array();
+			var descriptor = new Array();
+			var object = new Array();
+			var opening = new Array();
+			var power = new Array();
+			var refresh = new Array();
+			$.when(
+					$.get("lists/Condition.csv", function(content) {
+					    condition = content.split("\n");
+					  }),
+					  
+					  $.get("lists/Descriptor.csv", function(content) {
+						    descriptor = content.split("\n");
+						  }),
+						  
+					  $.get("lists/Object.csv", function(content) {
+						    object = content.split("\n");
+						  }),
+					  
+					  $.get("lists/Opening.csv", function(content) {
+					    opening = content.split("\n");
+					  }),
+
+					  $.get("lists/Power.csv", function(content) {
+						  power = content.split("\n");
+					  }),
+
+					  $.get("lists/Refresh.csv", function(content) {
+						  refresh = content.split("\n");
+					  })
+
+					).then(function() {
+						var openingEl = randomElement(opening);
+						var descriptorEl = randomElement(descriptor);
+						var objectEl = randomElement(object);
+						var powerEl = randomElement(power);
+						var conditionEl = randomElement(condition);
+						var refreshEl = randomElement(refresh);
+						$("#opening").text(openingEl);
+						$("#item").text(descriptorEl + " " + objectEl + 
+								" THAT " + powerEl + 
+								" WHENEVER " + conditionEl);
+						$("#refresh").text(refreshEl);
+
+					});
+		}
+		
+		function randomElement(array) {
+			return array[Math.floor(Math.random()*array.length)];
+		}
+	</script>
+</head>
+<body>
+	<div id="content">
+		<div>
+			<h1 id="opening"></h1>
+		</div>
+		<div>
+			<h1 id="item"></h1>
+		</div>
+		<div>
+			<h2><a id="refresh" href="#" onclick="generateItem();">Generate</a></h2>
+		</div>
+	</div>
+	<div id="credits">
+		<p>WTF Is My Ridiculous DnD Item Generator was lovingly crafted by Reddit users:</p>
+		<ul>
+			<li>u/RexiconJesse</li>
+			<li>u/Mimir-ion</li>
+			<li>u/wr3cking8a11</li>
+			<li>u/zweefer</li>
+		</ul>
+		This generator was inspired by <a href="http://whothefuckismydndcharacter.com">whothefuckismydndcharacter.com</a>
+	</div>
+</body>
+</html>

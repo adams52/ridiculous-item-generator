@@ -1,116 +1,47 @@
-<!DOCTYPE HTML>
+<!doctype html>
 <html>
-<head>
-	<title>WTF IS MY RIDICULOUS DND MAGICAL ITEM</title>
-	<style type="text/css">
-		#content {
-			text-align:center;
-			width:100%;
-			display:block;
-			
-		}
-		#content div {
-			width:60%;
-			margin:auto;
-		}
-		#opening {
-			font-style:italic;
-		}
-		
-		#item {
-			font-weight:bold;
-		}
-		#credits {
-			text-align:right;
-			position:absolute;
-			bottom:0;
-			right:0;
-			margin: 12px 24px;
-		}
-		ul {
-			list-style-type: none;
-		}
-	</style>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-	<script>
-		$( document ).ready(function() {
-		    generateItem();
-		});
-	
-		function generateItem() {
-			var condition = new Array();
-			var descriptor = new Array();
-			var object = new Array();
-			var opening = new Array();
-			var power = new Array();
-			var refresh = new Array();
-			$.when(
-					$.get("lists/Condition.csv", function(content) {
-					    condition = content.split("\n");
-					  }),
-					  
-					  $.get("lists/Descriptor.csv", function(content) {
-						    descriptor = content.split("\n");
-						  }),
-						  
-					  $.get("lists/Object.csv", function(content) {
-						    object = content.split("\n");
-						  }),
-					  
-					  $.get("lists/Opening.csv", function(content) {
-					    opening = content.split("\n");
-					  }),
-
-					  $.get("lists/Power.csv", function(content) {
-						  power = content.split("\n");
-					  }),
-
-					  $.get("lists/Refresh.csv", function(content) {
-						  refresh = content.split("\n");
-					  })
-
-					).then(function() {
-						var openingEl = randomElement(opening);
-						var descriptorEl = randomElement(descriptor);
-						var objectEl = randomElement(object);
-						var powerEl = randomElement(power);
-						var conditionEl = randomElement(condition);
-						var refreshEl = randomElement(refresh);
-						$("#opening").text(openingEl);
-						$("#item").text(descriptorEl + " " + objectEl + 
-								" THAT " + powerEl + 
-								" WHENEVER " + conditionEl);
-						$("#refresh").text(refreshEl);
-
-					});
-		}
-		
-		function randomElement(array) {
-			return array[Math.floor(Math.random()*array.length)];
-		}
-	</script>
-</head>
-<body>
-	<div id="content">
-		<div>
-			<h1 id="opening"></h1>
+	<head>
+		<title>What The Fuck Is&hellip;</title>
+		<meta name="description" content="A {something} idea generator" />
+		<meta name="copyright" content="Copyright Justin Windle 2014. All Rights Reserved." />
+		<meta name="author" content="Justin Windle" />
+		<link rel="apple-touch-icon" href="images/custom_icon.png"/>
+		<link rel="shortcut icon" href="images/favicon.png"/>
+		<link rel="stylesheet" href="styles/main.css" />
+	</head>
+	<body>
+		<div id="wrapper">
+		    <header>
+		        <h1>What The Fuck Is&hellip;</h1>
+		    </header>
+		    <article>
+		        <div id="output">
+		            <noscript>
+		                <dl>
+		                    <dt>What the fuck! You don't even have JavaScript enabled!</dt>
+		                    <dd>You need to enable it to see all the fucking cool shit on this website...</dd>
+		                </dl>
+		            </noscript>
+		        </div>
+		        <a id="generate" href="#" title="Hit me again!"></a>
+		    </article>
+		    <aside>
+		        <ul id="share">
+		            <li id="share-facebook"><iframe src="http://www.facebook.com/plugins/like.php?href=http%3A%2F%2Fwhatthefuckismymashup.com&amp;layout=button_count&amp;show_faces=true&amp;width=80&amp;action=like&amp;colorscheme=light&amp;height=21" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:80px; height:21px;" allowTransparency="true"></iframe></li>
+		            <li id="share-twitter"><a href="http://twitter.com/share" class="twitter-share-button" data-url="http://whatthefuckismymashup.com" data-count="horizontal" data-via="soulwire">Tweet</a><script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script></li>
+		        </ul>
+		    </aside>
+		    <footer>
+		        <div id="about">If you make it, make sure you make it <a href="http://www.opensource.org/" target="blank">Open Source</a></div>
+		        <div id="credit">Built with <a href="https://github.com/soulwire/WTFEngine" title="An HTML / CSS / JavaScript template for creating WhatTheFuckIsMyMashup.com style web sites" target="_blank">WTF Engine</a> by <a href="http://blog.soulwire.co.uk/" title="Made by Justin Windle @soulwire">Justin</a></div>
+		        <div>Inspired by <a href="http://whatthefuckshouldimakefordinner.com/" target="_blank">WTFSIMFD</a></div>
+		        <div id="total">There are <span id="templates"></span> and <span id="outcomes"></span> possibilities</div>
+		    </footer>
+		    <img class="loading" src="images/loading.gif">
 		</div>
-		<div>
-			<h1 id="item"></h1>
-		</div>
-		<div>
-			<h2><a id="refresh" href="#" onclick="generateItem();">Generate</a></h2>
-		</div>
-	</div>
-	<div id="credits">
-		<p>WTF Is My Ridiculous DnD Item Generator was lovingly crafted by Reddit users:</p>
-		<ul>
-			<li>u/RexiconJesse</li>
-			<li>u/Mimir-ion</li>
-			<li>u/wr3cking8a11</li>
-			<li>u/zweefer</li>
-		</ul>
-		This generator was inspired by <a href="http://whothefuckismydndcharacter.com">whothefuckismydndcharacter.com</a>
-	</div>
-</body>
+		<script src="//cdnjs.cloudflare.com/ajax/libs/zepto/1.1.2/zepto.min.js"></script>
+		<script>window.Zepto || document.write('<script src="scripts/vendor/zepto.min.js"><\/script>')</script>
+		<script src="scripts/wtf.js"></script>
+		<script src="scripts/main.js"></script>
+	</body>
 </html>
